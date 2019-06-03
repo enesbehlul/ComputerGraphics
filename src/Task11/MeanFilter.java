@@ -27,49 +27,31 @@ public class MeanFilter {
         int width = img.getWidth();
         int height = img.getHeight();
         ArrayList<Integer> pixels = new ArrayList<>();
-        int p = img.getRGB(0, 0);
-        int sump = 0;
-        int p1;
-        int p2;
-        int p3;
-        int p4;
-        int p5;
-        int p6;
-        int p7;
-        int p8;
-        int p9;
-        System.out.println(height);
+        int p;
         for (int x = 1; x < width - 1; x++) {
             for (int y = 1; y < height - 1; y++) {
                 pixels.clear();
-                p1 = img.getRGB(x - 1, y - 1);
-                p2 = img.getRGB(x - 1, y);
-                p3 = img.getRGB(x - 1, y + 1);
-                p4 = img.getRGB(x, y - 1);
-                p5 = img.getRGB(x, y);
-                p6 = img.getRGB(x, y + 1);
-                p7 = img.getRGB(x + 1, y - 1);
-                p8 = img.getRGB(x + 1, y);
-                p9 = img.getRGB(x + 1, y + 1);
-                pixels.add(p1);
-                pixels.add(p2);
-                pixels.add(p3);
-                pixels.add(p4);
-                pixels.add(p5);
-                pixels.add(p6);
-                pixels.add(p7);
-                pixels.add(p8);
-                pixels.add(p9);
-                p = ret(pixels);
+                pixels.add(img.getRGB(x - 1, y - 1));
+                pixels.add(img.getRGB(x - 1, y));
+                pixels.add(img.getRGB(x - 1, y + 1));
+                pixels.add(img.getRGB(x, y - 1));
+                pixels.add(img.getRGB(x, y));
+                pixels.add(img.getRGB(x, y + 1));
+                pixels.add(img.getRGB(x + 1, y - 1));
+                pixels.add(img.getRGB(x + 1, y));
+                pixels.add(img.getRGB(x + 1, y + 1));
+                
+                p = returnAvaregePixel(pixels);
                 img.setRGB(x, y, p);
             }
         }
+        System.out.println("Mean filter applied.");
         f = new File("/media/behlul/Dosyalarim/MeanFilter/meanFiltered.jpeg");  //output file path
         ImageIO.write(img, "jpeg", f);
 
     }
 
-    public static int ret(ArrayList<Integer> pixels) {
+    public static int returnAvaregePixel(ArrayList<Integer> pixels) {
         int sumA = 0, sumR = 0, sumG = 0, sumB = 0;
         int p;
         for (int i = 0; i < pixels.size(); i++) {
